@@ -10,7 +10,7 @@ User: Generate a 1-day personalized study plan for a DSA student.`;
 
   try {
     const response = await fetch(
-      `https://api-inference.huggingface.co/pipeline/text-generation/${model}`,
+      `https://api-inference.huggingface.co/models/${model}`,
       {
         method: "POST",
         headers: {
