@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CogniFlow Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      padding: 10px;
+    }
+    h2 { text-align: center; }
+    .stat { margin: 8px 0; }
+    button { margin-top: 10px; padding: 5px 10px; }
+  </style>
+</head>
+<body>
+  <h2>CogniFlow Tracker</h2>
+
+  <div class="stat">Focus Score: <span id="focusScore">--</span></div>
+  <div class="stat">Active Time: <span id="activeTime">--</span> sec</div>
+  <div class="stat">Idle Time: <span id="idleTime">--</span> sec</div>
+  <div class="stat">Tab Switches: <span id="tabSwitches">--</span></div>
+
+  <button id="refreshBtn">Refresh Analytics</button>
+  <button id="manualSubmitBtn">Submit Score Now</button>
+
+  <div id="response" style="margin-top:10px; font-size: 12px;"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+0000****000*******What we need for Cogniflow?******000*******0000
+
+Core features for backend:
+1.	User authentication & JWT – you’ve done this ✅
+2.	User data – track users, their profiles, roles (student/admin if needed) ✅
+3.	Cognitive score tracking – store scores per user ✅
+4.	Weekly study plan generation – integrate GPT, based on scores 
+5.	Protected routes – only logged-in users can access their scores or plans 
+Think of backend as 3 main layers:
+•	Models (DB) → How we store data
+•	Controllers (Logic) → What happens when user hits a route
+•	Routes (Endpoints) → How frontend talks to backend
+
+
+***********Cognitive Score Logic*************
+
+Coaching step: Think in “what user does → what backend stores”
+
+Frontend: user studies → track activity → send data (score, distractions, focusedTime)
+
+Backend: receive POST request → save to DB linked to user
+
+Route: POST /api/scores
+
+Controller: validate input → save → return saved score
+
+
+
+
+*******************GPT Integration for Weekly Plan************************
+
+Step-by-step thinking:
+
+Need latest cognitive score
+
+Send it to GPT (OpenAI API) → ask “Generate a weekly study plan for this user”
+
+Save plan in DB with week number
+
+Return plan to frontend
+
+💡 Coaching tip: Don’t code GPT immediately. First test by returning a dummy plan like "Study 2 hours/day" to make sure route works. Then integrate GPT.
+
+
+
+*************Routes & Controllers**************
+
+Coaching mindset: “Each route does one thing clearly”
+
+authRoutes: signup, login
+
+scoreRoutes: submit score, get all scores
+
+gptRoutes: generate weekly plan, get past plans
+
+userRoutes: get/update profile
+
+Check: Every route that needs a logged-in user → wrap with protect middleware.
+
+
+
+*******************Test Everything Step by Step*****************
+
+Use Postman or Thunder Client
+
+Test signup/login first → check JWT
+
+Test protected route → verify token works
+
+Test submit score → verify DB entry
+
+Test generate weekly plan → verify DB entry
+
+Always build incrementally. Don’t jump to GPT integration until the “normal backend” works perfectly.
+
+
+************************************************
+Refine Score Logic
+
+Right now you’re just saving raw values.
+
+Next, we can add focus score calculation (based on idleTime, tabSwitches, activityTime).
+
+That’s where “Cogniflow” starts becoming smart.
+
+Frontend Integration
+
+Hook your React frontend → connect login, register, submit score, view scores.
+
+Test end-to-end flow: login → study → submit score → see results.
+
+Extras (later, once stable):
+
+Leaderboards (compare users)
+
+Weekly focus reports (charts)
+
+GPT integration to give study tips based on scores
+
+
+
+
+
+
+
+*********************************************
+cogniflow-extension/
+│
+├── manifest.json        # Extension metadata
+├── popup.html           # Login UI
+├── popup.js             # Handles login
+├── background.js        # Real-time tracking & sending data
+├── content.js           # Optional: can interact with the webpage
+├── style.css            # Optional styles for popup
